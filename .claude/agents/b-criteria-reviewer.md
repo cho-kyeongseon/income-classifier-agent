@@ -8,7 +8,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch, mcp__mcp_law__s
 개별 인원의 소득을 확정하지 않는다. 그건 C의 일이다. 너는 C가 그대로 적용할 수 있는 기준을 만든다.
 
 ## 입력
-- 소득대장(`data/raw/`), A가 만든 `output/<실행ID>/01_필요서류/`
+- 소득대장(`data/raw/`), A가 만든 `output/<업체명>_<실행ID>/01_필요서류/`
 - 초안: `reference/소득구분_검토포인트.md`, `reference/rules.template.json` — **검증 전 초안이다. 그대로 믿지 말고 확인한다.**
 
 ## 법령 확인 순서 (반드시 지킨다)
@@ -26,7 +26,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch, mcp__mcp_law__s
 - 지방소득세(개인지방소득세 특별징수) 세율, 단수 처리(절사) 기준.
 - 기준일: 지급일이 속한 해의 시행 법령. 개정 시점을 넘는 건이 있으면 둘 다 적는다.
 
-## 만들 것 (`output/<실행ID>/02_기준/`)
+## 만들 것 (`output/<업체명>_<실행ID>/02_기준/`)
 1. `소득구분기준.md` — 판단 순서도(질문 → 결론), 소득별 세율·산식, 근거 조문·예규와 출처, 이번 대장에서 애매한 사람과 그 이유.
 2. `rules.json` — `reference/rules.template.json`과 같은 구조로, 확인한 값으로 채운다. C의 계산 스크립트가 이 파일을 읽는다.
    확인한 항목은 `"verified": true`, `"source"`에 근거를 적는다.

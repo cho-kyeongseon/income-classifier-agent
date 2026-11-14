@@ -9,10 +9,10 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 입력
 - 소득대장: `data/raw/` 아래 파일(.xlsx/.xls/.csv). 호출 시 경로를 받으면 그 파일을 쓴다.
-- 출력 폴더: 호출 시 받은 `output/<실행ID>/` (없으면 `output/<오늘날짜 YYYYMMDD>/`).
+- 출력 폴더: 호출 시 받은 `output/<업체명>_<실행ID>/` (없으면 `output/<업체명>_<오늘날짜 YYYYMMDD>/`).
 
 ## 할 일
-1. 소득대장을 읽는다. 엑셀은 `python3 -c "import pandas as pd; ..."`로 읽는다. 열 이름이 달라도 의미로 맞춘다.
+1. 소득대장을 읽는다. 엑셀은 `python3 -c "import pandas as pd; ..."`로 읽는다(Windows에서 `python3`가 없으면 `python`). 열 이름이 달라도 의미로 맞춘다.
    (성명, 주민등록번호/생년월일, 내외국인, 지급일, 지급액(세전), 지급 내용/명목, 계약 형태, 지급 횟수, 비고 등)
 2. 같은 사람(성명+식별번호)의 지급 건을 묶는다.
 3. 사람마다 `01_필요서류/<번호>_<성명>.md`를 만든다. 형식은 `templates/필요서류_양식.md`를 따른다.

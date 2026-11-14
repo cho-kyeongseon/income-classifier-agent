@@ -6,8 +6,13 @@
   - B `b-criteria-reviewer`: 법령 확인(mcp_law 먼저, 안 되면 국세법령정보시스템) → 소득구분기준.md + rules.json
   - C `c-income-calculator`: 구분 확정 + `scripts/calc_withholding.py`로 원천징수세액 계산
   - D `d-kakao-writer`: 대표님 카톡 메시지
-- 한 번에 실행: `/소득구분 data/raw/<소득대장>` (`.claude/commands/소득구분.md`)
+- 한 번에 실행: `/소득구분 업체명` (예: `/소득구분 해인커피`, `.claude/commands/소득구분.md`)
+  - `data/raw/`에서 파일 이름에 업체명이 들어간 소득대장을 찾는다(여러 개면 최신 파일).
+  - 결과는 `output/<업체명>_<YYYYMMDD_HHMM>/`에 저장(USB에만, GitHub 제외).
 - 계산 스크립트는 가상 샘플(`data/sample/구분확정_샘플.csv`)로 손계산과 일치 확인함.
+- 2026-11-14 해인커피 실습자료로 전체 흐름 실행 → `output/해인커피_20261114_1047/`
+  - 확정은 일용 2명(원천징수 4,440원)뿐, 8명 보류(서류 필요·간이세액표).
+  - 그날 법령 MCP 오류, law.go.kr 점검으로 시행령 제20조·제87조·제184조 등 미확인(verified=false).
 
 ## 주의
 - `reference/rules.template.json`의 세율·산식은 **법령 미확인 초안**이다. 작성 시 mcp_law는 오류,
@@ -17,6 +22,6 @@
 - `output/`은 개인정보가 있어 GitHub에 올리지 않는다.
 
 ## 다음 할 일
-- 실제 소득대장(또는 가상 샘플 `data/sample/소득대장_샘플.csv`)로 `/소득구분` 전체 흐름 시험.
+- 새 세션에서 `/소득구분 해인커피`로 명령·서브에이전트가 바로 동작하는지 확인.
 - 법령 접속이 되면 rules.template.json 값 확인·출처 기입.
 - 필요하면 상용 근로소득 간이세액표 계산 추가.
