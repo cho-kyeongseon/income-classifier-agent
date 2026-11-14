@@ -1,8 +1,22 @@
 # HANDOFF
 
 ## 현재 상태 (2026-11-14)
-- 저장소 초기 설정: .gitignore, CLAUDE.md 작성.
-- 아직 코드 없음.
+- 소득구분팀(A~D) 서브에이전트 작성: `.claude/agents/`
+  - A `a-document-writer`: 소득대장 → 인원별 필요서류 (`templates/필요서류_양식.md`)
+  - B `b-criteria-reviewer`: 법령 확인(mcp_law 먼저, 안 되면 국세법령정보시스템) → 소득구분기준.md + rules.json
+  - C `c-income-calculator`: 구분 확정 + `scripts/calc_withholding.py`로 원천징수세액 계산
+  - D `d-kakao-writer`: 대표님 카톡 메시지
+- 한 번에 실행: `/소득구분 data/raw/<소득대장>` (`.claude/commands/소득구분.md`)
+- 계산 스크립트는 가상 샘플(`data/sample/구분확정_샘플.csv`)로 손계산과 일치 확인함.
+
+## 주의
+- `reference/rules.template.json`의 세율·산식은 **법령 미확인 초안**이다. 작성 시 mcp_law는 오류,
+  국세법령정보시스템은 연결 끊김으로 확인하지 못했다. B가 실행 때마다 확인해 `verified: true`로 채워야 한다.
+- 이 저장소 전용 클라우드 환경 `income-classifier-agent`에 taxlaw.nts.go.kr, www.law.go.kr 접속을 허용해 두었다.
+- 상용 근로소득(간이세액표)은 스크립트가 계산하지 않고 보류로 둔다.
+- `output/`은 개인정보가 있어 GitHub에 올리지 않는다.
 
 ## 다음 할 일
-- 소득 구분 에이전트 설계(입력 형태, 분류 기준, 근거 법령 조회 방식).
+- 실제 소득대장(또는 가상 샘플 `data/sample/소득대장_샘플.csv`)로 `/소득구분` 전체 흐름 시험.
+- 법령 접속이 되면 rules.template.json 값 확인·출처 기입.
+- 필요하면 상용 근로소득 간이세액표 계산 추가.
