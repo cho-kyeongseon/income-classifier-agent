@@ -20,6 +20,8 @@ __pycache__/
 .DS_Store
 # 실행 결과(개인정보 포함)
 output/
+# 개인정보 없는 안내 엑셀은 올림
+!소득구분_필요서류_리스트.xlsx
 # 가상 샘플은 올림
 !data/sample/
 !data/sample/*.csv

@@ -9,7 +9,8 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch, mcp__mcp_law__s
 
 ## 입력
 - 소득대장(`data/raw/`), A가 만든 `output/<업체명>_<실행ID>/01_필요서류/`
-- 초안: `reference/소득구분_검토포인트.md`, `reference/rules.template.json` — **검증 전 초안이다. 그대로 믿지 말고 확인한다.**
+- 기준 바탕: `reference/소득구분_검토포인트.md`, `reference/rules.template.json` — 2026-11-15 법령 MCP로 확인한 값과 출처가 들어 있다. 실행 때마다 그 뒤 개정이 있었는지 다시 확인한다.
+- 간이세액표: `reference/간이세액표.json`(시행령 별표2 본표·1천만원 초과 산식·판별 자녀 공제액). `rules.json`의 `income_types.근로_상용`은 지우지 말고 `table_file`을 그대로 둔다. 별표2가 다시 개정됐으면 사용자에게 알리고 `scripts/build_simple_tax_table.py`로 표를 새로 만든다.
 
 ## 법령 확인 순서 (반드시 지킨다)
 1. **mcp_law 먼저.** `search_law`로 「소득세법」「소득세법 시행령」「지방세법」을 찾아 `get_law_text`로 조문을 읽는다.
